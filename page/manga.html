@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog Moderne avec Carousel à Droite</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- En-tête du blog -->
+    <header class="header">
+        <div class="header-content">
+            <h1>Ce que j'aime faire!!!</h1>
+            <p>Mes différentes occupations!!</p>
+        </div>
+    </header>
+
+    <!-- Section principale avec un article et un carousel à droite -->
+    <main class="main-container">
+        <section class="article">
+            <h2>Les mangas</h2>
+            <p>Les mangas et les animés, c'est tout mon monde à moi!!! Pour moi le meilleur manga/animé qui existe c'est One piece, un chef-d'œuvre 🤩! Cela raconte l'histoire d'un monde où la piraterie règne ! Et au début, le roi des pirates Gold D. Roger meurt, et à ce moment-là toutes les pirates se mettent à la recherche de son trésor, le One Piece! Et nous suivons l'histoire de Luffy qui compte devenir le roi des pirates! Il devient de plus en fort, surtout en ce moment!! 
+                Et il y a aussi Bleach et Jujustu Kaisen qui sont incroyable aussi!!
+            </p>
+            <a href="../index.html" class="btn-main">Accueil</a>
+        </section>
+
+        <!-- Carousel personnalisé placé à droite -->
+        <section class="carousel" id="carouselSection">
+            <div class="carousel-container">
+                <div class="carousel-slide">
+                    <img src="https://imgsrv.crunchyroll.com/cdn-cgi/image/fit=contain,format=auto,quality=85,width=1200,height=675/catalog/crunchyroll/a249096c7812deb8c3c2c907173f3774.jpg" alt="Image 1">
+                    <img src="https://s.yimg.com/ny/api/res/1.2/GjSHPQXue01f2k7g2PkyHA--/YXBwaWQ9aGlnaGxhbmRlcjt3PTY0MDtoPTQyNg--/https://media.zenfs.com/en/hypebeast_936/8f925ee29797bae5f0ef22f0126a3adf" alt="Image 2">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRhfE2WTuNw-xfklK_lkeHL7UbtEmsd9qfBaQ&s" alt="Image 3">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTVM-fl5tn3wjP7b8nvRQAQEk_-DcrAKViFBg&s" alt="Image 4">
+                </div>
+                <button class="carousel-button prev" aria-label="Précédent">&#10094;</button>
+                <button class="carousel-button next" aria-label="Suivant">&#10095;</button>
+                <div class="carousel-indicators">
+                    <span class="indicator active" data-slide="0"></span>
+                    <span class="indicator" data-slide="1"></span>
+                    <span class="indicator" data-slide="2"></span>
+                    <span class="indicator" data-slide="3"></span>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Pied de page -->
+    <footer class="footer">
+        <p>&copy; 2024 Nüma AIROLDI. Tous droits réservés.</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+    const carouselSlide = document.querySelector('.carousel-slide');
+    const carouselImages = document.querySelectorAll('.carousel-slide img');
+    const prevBtn = document.querySelector('.prev');
+    const nextBtn = document.querySelector('.next');
+    const indicators = document.querySelectorAll('.indicator');
+
+    let counter = 0;
+    const totalSlides = carouselImages.length;
+
+    // Position initial des images
+    carouselSlide.style.transform = `translateX(-${counter * 100}%)`;
+
+    // Fonction pour mettre à jour les indicateurs
+    function updateIndicators() {
+        indicators.forEach(ind => ind.classList.remove('active'));
+        indicators[counter].classList.add('active');
+    }
+
+    // Bouton suivant
+    nextBtn.addEventListener('click', () => {
+        if (counter >= totalSlides - 1) {
+            counter = 0;
+        } else {
+            counter++;
+        }
+        carouselSlide.style.transform = `translateX(-${counter * 100}%)`;
+        updateIndicators();
+    });
+
+    // Bouton précédent
+    prevBtn.addEventListener('click', () => {
+        if (counter <= 0) {
+            counter = totalSlides - 1;
+        } else {
+            counter--;
+        }
+        carouselSlide.style.transform = `translateX(-${counter * 100}%)`;
+        updateIndicators();
+    });
+
+    // Indicateurs cliquables
+    indicators.forEach(indicator => {
+        indicator.addEventListener('click', (e) => {
+            const index = parseInt(e.target.getAttribute('data-slide'));
+            counter = index;
+            carouselSlide.style.transform = `translateX(-${counter * 100}%)`;
+            updateIndicators();
+        });
+    });
+
+    // Slide automatique
+    let slideInterval = setInterval(() => {
+        nextBtn.click();
+    }, 5000);
+
+    // Pause le slide automatique au survol
+    const carouselContainer = document.querySelector('.carousel-container');
+    carouselContainer.addEventListener('mouseenter', () => {
+        clearInterval(slideInterval);
+    });
+    carouselContainer.addEventListener('mouseleave', () => {
+        slideInterval = setInterval(() => {
+            nextBtn.click();
+        }, 5000);
+    });
+
+    // Swipe functionality for touch devices
+    let startX;
+    let isDragging = false;
+
+    carouselContainer.addEventListener('touchstart', (e) => {
+        startX = e.touches[0].clientX;
+        isDragging = true;
+    });
+
+    carouselContainer.addEventListener('touchmove', (e) => {
+        if (!isDragging) return;
+        const currentX = e.touches[0].clientX;
+        const diffX = startX - currentX;
+
+        if (diffX > 50) {
+            nextBtn.click();
+            isDragging = false;
+        } else if (diffX < -50) {
+            prevBtn.click();
+            isDragging = false;
+        }
+    });
+
+    carouselContainer.addEventListener('touchend', () => {
+        isDragging = false;
+    });
+});
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,222 @@
+/* Variables CSS pour une personnalisation facile */
+:root {
+    --primary-color: #4CAF50;
+    --secondary-color: #ffffff;
+    --text-color: #333333;
+    --header-height: 60vh;
+    --transition-speed: 0.5s;
+    --indicator-size: 12px;
+}
+
+/* Reset des marges et paddings */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Style du corps */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: var(--text-color);
+    line-height: 1.6;
+}
+
+/* En-tête */
+.header {
+    background: url('https://img.freepik.com/photos-gratuite/illustration-hawaienne-dans-style-bande-dessinee-retro_23-2151771008.jpg?t=st=1728779924~exp=1728783524~hmac=53a8a698fb94be8f786dd1c5df38213cd4568ee63738883bc1b68544ad7a096b&w=996') center/cover no-repeat;
+    height: var(--header-height);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    color: var(--secondary-color);
+    text-align: center;
+}
+
+.header::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.header-content {
+    position: relative;
+    z-index: 1;
+}
+
+.header h1 {
+    font-size: 3rem;
+    margin-bottom: 0.5rem;
+}
+
+.header p {
+    font-size: 1.2rem;
+}
+
+.btn-main {
+    background: #ff4081;
+    color: white;
+    padding: 12px 25px;
+    border-radius: 30px;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 1rem;
+    text-decoration: none;
+    transition: background 0.3s ease;
+  }
+  
+  .btn-main:hover {
+    background: #e7356a;
+  }
+
+/* Section principale */
+.main-container {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 40px 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    justify-content: space-between;
+}
+
+/* Article */
+.article {
+    flex: 0 1 60%; /* 60% pour l'article */
+    padding: 20px;
+}
+
+.article h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+.article p {
+    font-size: 1rem;
+    margin-bottom: 1rem;
+}
+
+/* Carousel */
+.carousel {
+    flex: 0 1 35%; /* 35% pour le carousel */
+    padding: 20px;
+}
+
+.carousel-container {
+    position: relative;
+    overflow: hidden;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+}
+
+.carousel-slide {
+    display: flex;
+    transition: transform var(--transition-speed) ease-in-out;
+    will-change: transform;
+}
+
+.carousel-slide img {
+    width: 100%;
+    flex-shrink: 0;
+    border-radius: 10px;
+    object-fit: cover;
+}
+
+/* Boutons de navigation */
+.carousel-button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0,0,0,0.5);
+    border: none;
+    color: var(--secondary-color);
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 50%;
+    font-size: 1.5rem;
+    transition: background-color var(--transition-speed);
+    z-index: 2;
+}
+
+.carousel-button:hover {
+    background-color: rgba(0,0,0,0.8);
+}
+
+.prev {
+    left: 15px;
+}
+
+.next {
+    right: 15px;
+}
+
+/* Indicateurs du carousel */
+.carousel-indicators {
+    position: absolute;
+    bottom: 15px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 10px;
+    z-index: 2;
+}
+
+.indicator {
+    width: var(--indicator-size);
+    height: var(--indicator-size);
+    background-color: rgba(255, 255, 255, 0.5);
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background-color var(--transition-speed);
+}
+
+.indicator.active,
+.indicator:hover {
+    background-color: var(--primary-color);
+}
+
+/* Pied de page */
+.footer {
+    background-color: #222;
+    color: var(--secondary-color);
+    text-align: center;
+    padding: 20px;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+}
+
+/* Responsivité */
+@media (max-width: 1024px) {
+    .main-container {
+        flex-direction: column;
+    }
+
+    .article, .carousel {
+        flex: 1 1 100%;
+    }
+
+    .header h1 {
+        font-size: 2.5rem;
+    }
+
+    .header p {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .carousel-button {
+        padding: 8px;
+        font-size: 1.2rem;
+    }
+
+    .indicator {
+        width: 10px;
+        height: 10px;
+    }
+}

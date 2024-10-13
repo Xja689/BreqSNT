@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="style.css" rel="stylesheet">
+  <title>Page de Présentation</title>
+
+
+<!--
+
+PS : Monsieur, comme je ne savais pas si j'avais le droit de faire un fichier JS,
+du coup j'ai tout mis dans le HTML. Je sais que ce n'est pas recommandé, 
+mais je ne voulais pas prendre de risque😭
+
+-->
+
+
+
+
+</head>
+<body>
+  <!-- Section Hero -->
+  <section class="hero">
+    <div class="hero-content">
+      <h1>Ce que j'aime faire!!!</h1>
+      <p>Mes différentes occupations!!</p>
+      <a href="#occupations" class="btn-main">Explorez</a>
+    </div>
+  </section>
+
+  <!-- Section Occupations -->
+  <section id="occupations" class="occupations">
+    <div class="container">
+      <h2>Occupations</h2>
+      <div class="occupations-grid">
+        <div class="occupations">
+          <h3>Le code🤖</h3>
+          <a href="page/code.html" class="btn-main">Lire</a>
+        </div>
+        <div class="occupations">
+          <h3>Les jeux vidéo🎮</h3>
+          <a href="page/jeux.html" class="btn-main">Lire</a>
+        </div>
+        <div class="occupations">
+          <h3>Les mangas📚</h3>
+          <a href="page/manga.html" class="btn-main">Lire</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <p>&copy; 2024 Nüma AIROLDI. Tous droits réservés.</p>
+    </div>
+  </footer>
+
+</body>
+
+<!-- JS -->
+
+  <script>
+    // Animation au chargement (fade-in)
+window.addEventListener('load', () => {
+  document.querySelectorAll('.hero-content h1, .hero-content p, .feature, .testimonial').forEach((element, index) => {
+    setTimeout(() => {
+      element.style.opacity = 1;
+      element.style.transform = 'translateY(0)';
+    }, index * 300);
+  });
+});
+
+window.addEventListener('load', () => {
+  const hero = document.querySelector('.hero');
+  hero.style.transition = 'opacity 2s ease-in-out';
+  hero.style.opacity = 1;  // L'animation de fond se déclenche au chargement
+});
+
+
+  </script>
+
+</html>
